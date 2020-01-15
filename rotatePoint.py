@@ -23,11 +23,17 @@ xPosCoefficient=0.01
 
 cCol = (255,0,0)
 flailDistance = 100
+
+clockwise=False
 while not done:
     mX,mY=pygame.mouse.get_pos()
     
-    xAxis += xCoefficient
-    yAxis += yCoefficient
+    if clockwise:
+        xAxis += xCoefficient
+        yAxis += yCoefficient
+    else:
+        xAxis -= xCoefficient
+        yAxis -= yCoefficient
     
     xPos += xPosCoefficient
     
