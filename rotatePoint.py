@@ -22,6 +22,7 @@ xPos=400
 xPosCoefficient=0.01
 
 cCol = (255,0,0)
+pointRad=5
 flailDistance = 100
 
 clockwise=False
@@ -50,10 +51,10 @@ while not done:
         yCoefficient*=-1
     
     
-    if xPos > winx-(bRad+flailDistance):
+    if xPos > winx-(bRad+flailDistance-pointRad):
         xPosCoefficient*=-1
         
-    if xPos < bRad+flailDistance:
+    if xPos < bRad+flailDistance-pointRad:
         xPosCoefficient*=-1
         
     mpointX = (int(xPos) + (math.cos(xAxis) * flailDistance))
@@ -75,7 +76,7 @@ while not done:
     
     screen.fill((0,0,0))
     pygame.draw.circle(screen, cCol, (int(mpointX),int(mpointY)), int(bRad))
-    pygame.draw.circle(screen, cCol, (int(xPos),300), 5)
+    pygame.draw.circle(screen, cCol, (int(xPos),300), pointRad)
     pygame.draw.line(screen, cCol, (int(mpointX),int(mpointY)),(int(xPos),300))
     pygame.display.flip()
     
