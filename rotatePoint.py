@@ -16,12 +16,19 @@ yCoefficient=0.001
 centerX = int(winx/2)
 centerY = int(winy/2)
 
-bRad=55
+bRad=50
 
+xPos=400
+xPosCoefficient=0.01
+
+cCol = (255,0,0)
 while not done:
-
+    mX,mY=pygame.mouse.get_pos()
+    
     xAxis += xCoefficient
     yAxis += yCoefficient
+    
+    xPos += xPosCoefficient
     
     if xCoefficient >= 1.0:
         xCoefficient*=-1
@@ -34,13 +41,21 @@ while not done:
         
     if yCoefficient <= -1.0:
         yCoefficient*=-1
-       
-    mpointX = 400+(math.cos(xAxis) * 100)
-    mpointY = 300+(math.sin(yAxis) * 100)
     
-    mX,mY=pygame.mouse.get_pos()
     
-    bRad = math.sqrt((mX-mpointX)**2 + (mY-mpointY)**2)
+    if xPos > winx-bRad:
+        xPosCoefficient*=-1
+        
+    if xPos < bRad:
+        xPosCoefficient*=-1
+        
+    mpointX = (int(xPos) + (math.cos(xAxis) * 100))
+    mpointY = (300 + (math.sin(yAxis) * 100))
+        
+    if math.sqrt((mX-mpointX)**2 + (mY-mpointY)**2) <= bRad:
+        cCol = (0,255,0)
+    else:
+        cCol = (255,0,0)
     
     events = pygame.event.get()
     
@@ -52,7 +67,9 @@ while not done:
             done=True
     
     screen.fill((0,0,0))
-    pygame.draw.circle(screen, (255,0,0), (int(mpointX),int(mpointY)), int(bRad))
+    pygame.draw.circle(screen, cCol, (int(mpointX),int(mpointY)), int(bRad))
+    pygame.draw.circle(screen, cCol, (int(xPos),300), 5)
+    pygame.draw.line(screen, cCol, (int(mpointX),int(mpointY)),(int(xPos),300))
     pygame.display.flip()
     
 
