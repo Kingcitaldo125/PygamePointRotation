@@ -22,6 +22,7 @@ xPos=400
 xPosCoefficient=0.01
 
 cCol = (255,0,0)
+flailDistance = 100
 while not done:
     mX,mY=pygame.mouse.get_pos()
     
@@ -43,14 +44,14 @@ while not done:
         yCoefficient*=-1
     
     
-    if xPos > winx-bRad:
+    if xPos > winx-(bRad+flailDistance):
         xPosCoefficient*=-1
         
-    if xPos < bRad:
+    if xPos < bRad+flailDistance:
         xPosCoefficient*=-1
         
-    mpointX = (int(xPos) + (math.cos(xAxis) * 100))
-    mpointY = (300 + (math.sin(yAxis) * 100))
+    mpointX = (int(xPos) + (math.cos(xAxis) * flailDistance))
+    mpointY = (300 + (math.sin(yAxis) * flailDistance))
         
     if math.sqrt((mX-mpointX)**2 + (mY-mpointY)**2) <= bRad:
         cCol = (0,255,0)
