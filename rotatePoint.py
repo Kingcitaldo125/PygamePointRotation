@@ -58,7 +58,7 @@ while not done:
         xPosCoefficient*=-1
         
     mpointX = (int(xPos) + (math.cos(xAxis) * flailDistance))
-    mpointY = (300 + (math.sin(yAxis) * flailDistance))
+    mpointY = (centerY + (math.sin(yAxis) * flailDistance))
         
     if math.sqrt((mX-mpointX)**2 + (mY-mpointY)**2) <= bRad:
         cCol = (0,255,0)
@@ -76,8 +76,8 @@ while not done:
     
     screen.fill((0,0,0))
     pygame.draw.circle(screen, cCol, (int(mpointX),int(mpointY)), int(bRad))
-    pygame.draw.circle(screen, cCol, (int(xPos),300), pointRad)
-    pygame.draw.line(screen, cCol, (int(mpointX),int(mpointY)),(int(xPos),300))
+    pygame.draw.circle(screen, cCol, (int(xPos), centerY), pointRad)
+    pygame.draw.line(screen, cCol, (int(mpointX),int(mpointY)),(int(xPos), centerY))
     pygame.display.flip()
     
 
